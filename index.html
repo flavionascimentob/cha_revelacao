@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ele ou Ela? - Chá Revelação</title>
+        <style>
+        /* PALETA DE CORES */
+        :root {
+            --pink-baby: #FFB6C1; /* Rosa Bebê */
+            --blue-baby: #ADD8E6; /* Azul Bebê */
+            --white-pure: #FFFFFF;
+            --gray-soft: #696969;
+            --text-primary: #333333; /* Cinza Escuro para leitura */
+        }
+
+        /* ESTILOS GERAIS */
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--white-pure);
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        h1, h2 {
+            font-family: 'Pacifico', cursive; /* Fonte mais charmosa para títulos */
+            margin: 10px 0;
+        }
+
+        h2 {
+            color: var(--text-primary);
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            padding: 40px 5%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .theme-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* 1. HEADER/TOPO - LAYOUT ROSA/AZUL */
+        .hero-section {
+            display: flex;
+            position: relative;
+            min-height: 70vh; /* Altura mínima para ocupar a tela */
+            overflow: hidden;
+        }
+
+        .half {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--white-pure);
+            padding: 20px;
+        }
+
+        .blue {
+            background-color: var(--blue-baby);
+        }
+
+        .pink {
+            background-color: var(--pink-baby);
+        }
+
+        .title {
+            font-size: 3em;
+            margin-bottom: 0;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        .central-message {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.95); /* Fundo branco semi-transparente */
+            padding: 25px 35px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 42%;
+        }
+
+        .central-message p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .parents {
+            margin-top: 15px;
+            font-style: italic;
+            color: var(--gray-soft);
+        }
+
+        /* 3. SEÇÃO DETALHES */
+        .details-section {
+            background-color: #f7f7f7; /* Um toque de cinza claro */
+        }
+
+        .details-card {
+            background-color: var(--white-pure);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+        }
+
+        .detail-item h3 {
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .rsvp-button {
+            display: inline-block;
+            background-color: var(--pink-baby);
+            color: var(--white-pure);
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .rsvp-button:hover {
+            background-color: var(--blue-baby); /* Muda de cor ao passar o mouse */
+        }
+
+        /* 4. SEÇÃO PRESENTES */
+        .gifts-section {
+            background-color: var(--white-pure);
+        }
+
+        .gift-options {
+            display: flex;
+            flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .gift-options div {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            padding: 15px;
+            border: 1px dashed var(--gray-soft);
+            border-radius: 8px;
+        }
+
+        .gift-options h3 {
+            color: var(--blue-baby);
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.2em;
+        }
+
+        /* 5. FOOTER */
+        .footer-section {
+            background-color: var(--blue-baby);
+            color: var(--white-pure);
+            padding: 20px 0;
+        }
+
+        .hashtag {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+
+        /* RESPONSIVIDADE (MOBILE PRIMEIRO) */
+        @media (max-width: 600px) {
+            .hero-section {
+                flex-direction: column; /* Pilha os elementos no celular */
+                min-height: 90vh;
+            }
+            
+            .half {
+                padding: 10px;
+            }
+
+            .title {
+                font-size: 2.5em;
+            }
+
+            .central-message {
+                width: 80%;
+            }
+
+            .gift-options div {
+                min-width: 100%;
+            }
+        }
+
+        /* --- ESTILOS E ANIMAÇÕES DOS BALÕES --- */
+
+        /* * NOTA: 
+        * O CSS para .balloons-container, .balloon e @keyframes 
+        * não precisa de alteração, apenas as cores. 
+        */
+
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            opacity: 0.9; /* Opacidade aumentada um pouco para as cores mais escuras */
+            transform: rotate(0deg);
+            
+            /* ADICIONANDO A BORDA BRANCA */
+            border: 2px solid var(--white-pure); 
+            
+            /* Adiciona a animação de subida e flutuação */
+            animation: ascend 10s linear forwards, float 3s ease-in-out infinite alternate;
+        }
+
+        /* Criando o "nó" ou "fio" do balão com pseudo-elemento */
+        .balloon::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.4); /* Fio levemente mais escuro */
+            border-radius: 0 0 2px 2px;
+        }
+
+        /* Cores ESCURAS para contraste e com borda */
+        .balloon.pink-color {
+            /* Rosa Escuro Profundo (Exemplo: #C71585 - Rosa Med. Violeta Escuro) */
+            background-color: #d64a78;
+            box-shadow: 0 0 12px rgba(214, 74, 120, 0.5); /* Sombra da cor escura */
+        }
+
+        .balloon.blue-color {
+            /* Azul Escuro (Exemplo: #191970 - Azul Meia-noite) */
+            background-color: #4a78d6;
+            box-shadow: 0 0 12px rgba(74, 120, 214, 0.5); /* Sombra da cor escura */
+        }
+
+        /* ANIMAÇÕES (Mantenha as mesmas, se já as tiver) */
+
+        @keyframes ascend {
+            0% {
+                bottom: -100px;
+                transform: rotate(0deg);
+            }
+            100% {
+                bottom: 100vh;
+                transform: rotate(10deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateX(0px);
+            }
+            100% {
+                transform: translateX(10px);
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="hero-section">
+        <div class="half blue">
+            <h1 class="title">Ele?</h1>
+            <p class="subtitle">Março/2026</p>
+        </div>
+        <div class="half pink">
+            <h1 class="title">Ela?</h1>
+            <p class="subtitle">Março/2026</p>
+        </div>
+        
+        <div class="central-message">
+            <p>A grande surpresa está chegando! Com o coração cheio de amor e curiosidade, convidamos você para descobrir conosco se o nosso mundo será de laços ou gravatas.</p>
+        </div>
+    </header>
+    
+    <section class="section baby-info">
+        <h2>Uma vida nos espera!</h2>
+        <img src="img/ultra_bebe.jpg" alt="Ele ou Ela? " width="400" height="300">
+        <p>Em breve seremos 5! Estamos contando os dias para conhecer o rostinho de quem já transformou a nossa vida. Mal podemos esperar para ter você ao nosso lado enquanto revelamos o grande segredo.</p>
+    </section>
+
+    <section class="section details-section">
+        <div class="details-card">
+            <h2>Quando e Onde?</h2>
+            
+            <div class="detail-item">
+                <h3>Local</h3>
+                <p>SRES Quadra 02 Bloco G Casa 50 - Cruzeiro Velho</p>
+            </div>
+            
+            <div class="detail-item">
+                <h3>Data/Hora</h3>
+                <p>19/10/2025, às 15h</p>
+            </div>
+            
+            <div class="detail-item">
+                <h3>Traje</h3>
+                <p>Casual e leve! Traga seu palpite (Azul ou Rosa).</p>
+            </div>
+            
+            <a href="[LINK DO SEU FORMULÁRIO RSVP]" class="rsvp-button">Confirmar Presença (RSVP)</a>
+        </div>
+    </section>
+
+    <section class="section gifts-section">
+        <h2>Sua presença e carinho são o nosso melhor presente! Caso queira dar um mimo ao bebê, seguem algumas sugestões:</h2>
+        <div class="gift-options">
+            <div>
+                <h3>1. Kit fralda + Lencinho</h3>
+                <img src="img/foto_cha_001.jpg" alt="Sugestão 1" width="200" height="100">
+                <p>Valor R$ 70,00 a R$ 110,00</p>
+            </div>
+            <div>
+                <h3>2. Fraldas descartáveis</h3>
+                <img src="img/foto_cha_002.jpg" alt="Sugestão 2" width="200" height="100">
+                <p>Valor R$ 50,00 a R$ 100,00</p>
+            </div>
+            <div>
+                <h3>3. Kit fraldas reutilizáveis</h3>
+                <img src="img/foto_cha_003.jpg" alt="Sugestão 3" width="200" height="100">
+                <p>Valor R$ 60,00 a R$ 120,00</p>
+            </div>
+            <div>
+                <h3>3. Nintendo Switch 2</h3>
+                <img src="img/foto_cha_004.jpg" alt="Melhor Sugestão" width="200" height="100">
+                <p>Valor R$ 3.500,00 a 4.000,00</p>
+            </div>
+            <div>
+                <h3>PIX</h3>
+                <img src="img/imagem_pix.png" alt="PIX" width="300" height="200">
+                <p>Valor do presente</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-section">
+        <div class="footer-contact">
+            <p>Dúvidas? Fale com a Mamãe ou Papai</p>
+        </div>
+        <p class="hashtag">#NossoBebêChegando</p>
+    </footer>
+
+     <div class="balloons-container" id="balloonsContainer"></div>
+
+     <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const container = document.getElementById('balloonsContainer');
+            const colors = ['pink-color', 'blue-color'];
+            const numberOfBalloons = 15; // Ajuste a quantidade de balões
+
+            function createBalloon() {
+                const balloon = document.createElement('div');
+                
+                // Escolhe cor aleatória (rosa ou azul)
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                balloon.classList.add('balloon', randomColor);
+
+                // Define uma posição horizontal aleatória (0% a 100%)
+                const randomLeft = Math.floor(Math.random() * 100);
+                balloon.style.left = randomLeft + 'vw';
+                
+                // Define um tamanho aleatório (para variar a profundidade e velocidade)
+                const randomSize = Math.floor(Math.random() * (60 - 30) + 30); // Entre 30px e 60px
+                balloon.style.width = randomSize + 'px';
+                balloon.style.height = (randomSize * 1.25) + 'px'; // Altura maior para formato de balão
+                
+                // Define uma duração e atraso de animação aleatórios
+                const randomDuration = Math.random() * (15 - 8) + 8; // Duração entre 8s e 15s
+                const randomDelay = Math.random() * 3; // Atraso entre 0s e 3s
+                
+                // Aplica a animação
+                balloon.style.animationDuration = randomDuration + 's, 3s'; 
+                balloon.style.animationDelay = randomDelay + 's, 0s';
+
+                container.appendChild(balloon);
+
+                // Remove o balão do DOM após a animação (limpeza)
+                setTimeout(() => {
+                    balloon.remove();
+                }, (randomDuration + randomDelay) * 1000);
+            }
+
+            // Gera todos os balões no carregamento da página
+            for (let i = 0; i < numberOfBalloons; i++) {
+                createBalloon();
+            }
+        });
+    </script>
+
+</body>
+</html>
